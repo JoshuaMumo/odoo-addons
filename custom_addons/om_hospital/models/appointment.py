@@ -12,6 +12,7 @@ class HospitalAppointment(models.Model):
     appointment_time = fields.Date(string='Appointment Time', default=fields.Datetime.now)
     booking_date = fields.Date(string='Booking Date', default=fields.Date.context_today)
     ref = fields.Char(string="Reference", related='parent_id.ref')
+    name = fields.Char(string="Appointment Reference", readonly=True, copy=False, default='New')
     days_to_booking_date = fields.Integer(string='No of Days ', compute='_compute_days')
     prescription = fields.Html(string="Prescription")
     pharmacy = fields.Html(string="Pharmacy")
@@ -45,6 +46,13 @@ class HospitalAppointment(models.Model):
     @api.onchange('patient_id')
     def onchange_patient_id(self):
         self.ref=self.patient_id.ref
+
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('hospital.appointment') or 'New'
+        return super(HospitalAppointment, self).create(vals)
 
     # def action_test(self):
     #     for rec in self:

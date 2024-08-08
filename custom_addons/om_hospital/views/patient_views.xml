@@ -5,7 +5,7 @@
         <field name="name">hospital.patient.tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <tree create="0" >
+            <tree>
                 <field name="ref" string="Reference"/>
                 <field name="name" string="Patient Name"/>
                 <field name="gender" optional="show"/>

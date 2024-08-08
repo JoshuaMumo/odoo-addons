@@ -5,6 +5,18 @@
 <!--decoration-muted &#45;&#45; no color-->
 
 <odoo>
+    <!--    for new appointment-->
+    <record id="action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">appointment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new appointment
+            </p>
+        </field>
+    </record>
     <!--    dashboard view -->
     <record id="view_hospital_appointment_tree" model="ir.ui.view">
         <field name="name">hospital.appointment.tree</field>
@@ -103,18 +115,7 @@
             </search>
         </field>
     </record>
-    <!--    for new appointment-->
-    <record id="action_hospital_appointment" model="ir.actions.act_window">
-        <field name="name">appointment</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hospital.appointment</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new appointment
-            </p>
-        </field>
-    </record>
+
 <!--appointments menu item-->
     <menuitem id="menu_appointment"
               name="Appointments"
