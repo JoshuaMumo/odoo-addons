@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_tenders" model="ir.actions.act_window">
+        <field name="name">Tenders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tender.management</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a tender
+            </p>
+        </field>
+    </record>
+
     <record id="view_tenders_tree" model="ir.ui.view">
         <field name="name">tenders.management</field>
         <field name="model">tender.management</field>
         <field name="arch" type="xml">
             <tree string="Tenders Management">
-                <field name="name"/>
                 <field name="ref"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_created"/>
+                <field name="date_bid_to_end"/>
+                <field name="days_to_deadline"/>
             </tree>
         </field>
     </record>
@@ -30,12 +46,11 @@
                     <button name="action_draft" string="DRAFT" type="object" invisible="state not in 'cancel'"
                             class="oe_highlight"/>
                     <button name="%(action_tenders)d" string="VIEW TENDER" type="action" invisible="state not in 'done'"
-                            class="oe_highlight"/>
+                            class="oe_highlight" confirm="Are you sure you want to open tender window?"/>
                     <field name="state" widget="statusbar" nolabel="1"
                            statusbar_visible="draft,submit,approve,approved,done"/>
                 </header>
                 <sheet>
-                    <!--                    <group>-->
                     <group>
                         <field name="ref"/>
                         <field name="name" default_focus="1"/>
@@ -44,23 +59,18 @@
                         <field name="date_bid_to_end"/>
                         <field name="days_to_deadline"/>
                     </group>
-                    <!--                        <group>-->
-                    <!--                            <field name=""/>-->
-                    <!--                        </group>-->
-
-                    <!--                    </group>-->
                     <notebook>
                         <page string="Products" name="products">
                             <field name="tender_management_line_ids">
                                 <tree string="Tender Management Line Ids" editable="bottom">
                                     <field name="product_id"/>
-                                    <field name="price_unit"/>
+                                    <field name="description"/>
                                     <field name="qty"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <field name="product_id"/>
-                                        <field name="price_unit"/>
+                                        <field name="description"/>
                                         <field name="qty"/>
                                     </group>
                                 </form>
@@ -83,24 +93,24 @@
         <field name="model">tender.management</field>
         <field name="arch" type="xml">
             <kanban>
-    <field name="name"/>
-    <field name="formatted_date"/>
-    <field name="days_to_deadline"/>
-    <field name="date_bid_to_end"/>
+                <field name="name"/>
+                <field name="formatted_date"/>
+                <field name="days_to_deadline"/>
+                <field name="date_bid_to_end"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
                             <div class="o_kanban_record_top" style="display: flex;">
                                 <div class="oe_kanban_bottom_left"
-                         style="flex: 0 0 80px; background-color: #00A09D; color: white; padding: 8px; text-align: center;">
-                        <weak>
-                            <t t-esc="record.formatted_date.raw_value.split('\n')[0].trim()"/>
-                        </weak>
-                        <br/>
-                        <weak>
-                            <t t-esc="record.formatted_date.raw_value.split('\n')[1].trim()"/>
-                        </weak>
-                        <br/>
+                                     style="flex: 0 0 80px; background-color: #00A09D; color: white; padding: 8px; text-align: center;">
+                                    <weak>
+                                        <t t-esc="record.formatted_date.raw_value.split('\n')[0].trim()"/>
+                                    </weak>
+                                    <br/>
+                                    <weak>
+                                        <t t-esc="record.formatted_date.raw_value.split('\n')[1].trim()"/>
+                                    </weak>
+                                    <br/>
                                     <weak>
                                         <field name="days_to_deadline"/>
                                     </weak>
@@ -112,8 +122,6 @@
                                         <field name="name"/>
                                     </strong>
                                     <br/>
-<!--                                    <field name="country"/>-->
-<!--                                    <br/>-->
                                     <small>Deadline:
                                         <field name="date_bid_to_end"/>
                                     </small>
@@ -126,13 +134,6 @@
         </field>
     </record>
 
-
-    <record id="action_tenders" model="ir.actions.act_window">
-        <field name="name">Tenders</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">tender.management</field>
-        <field name="view_mode">kanban,tree,form</field>
-    </record>
 
     <menuitem id="menu_management_tenders_main" name="Tenders" parent="menu_tenders_master" action="action_tenders"
               sequence="5"/>
