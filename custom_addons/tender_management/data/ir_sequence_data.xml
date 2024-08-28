@@ -5,13 +5,13 @@
             <field name="name">Tender Reference</field>
             <field name="code">tender.management</field>
             <field name="prefix">TR-</field>
-            <field name="padding">5</field>
+            <field name="padding">4</field>
         </record>
         <record id="seq_bid_reference" model="ir.sequence">
             <field name="name">Bid Reference</field>
             <field name="code">tender.bid</field>
-            <field name="prefix">TR-</field>
-            <field name="padding">5</field>
+            <field name="prefix">BID-</field>
+            <field name="padding">4</field>
         </record>
     </data>
 </odoo>

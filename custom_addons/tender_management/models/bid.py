@@ -5,7 +5,7 @@ class TenderBid(models.Model):
     _name = "tender.bid"
     _description = "Tender Bid"
 
-    name = fields.Char(string="Bid Reference", copy=False)
+    name = fields.Char(string="Bid Reference", readonly=True, copy=False, default='New Bid Ref')
     tender_id = fields.Many2one('tender.management', string="Tender")
     tender_user = fields.Many2one('res.users', string="Purchase Representative", related='tender_id.tender_user')
     ref = fields.Char(string="Reference", readonly=True, related='tender_id.ref')
