@@ -15,7 +15,7 @@
         "security/ir.model.access.csv",
         "views/menu.xml",
         "views/tender_views.xml",
-        "views/bid_views.xml",
+        "views/bid/_views.xml",
     ],
     'demo': [],
     'installable': True,
