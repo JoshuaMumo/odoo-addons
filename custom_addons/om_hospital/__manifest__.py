@@ -9,7 +9,7 @@
     'sequence': 1,
     'summary': 'Hospital management system',
     'description': """ Hospital management system """,
-    'depends': ['mail'],
+    'depends': ['mail','product'],
     'data': [
         'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',
